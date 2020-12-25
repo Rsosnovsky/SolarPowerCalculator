@@ -25,14 +25,14 @@ const Header: React.FC = () => {
 const styles = StyleSheet.create({
     HeaderBackground: {
         paddingHorizontal: 0,
-        height: 150,
+        height: 75,
         backgroundColor: '#3A2A2F',
         display: 'flex',
         justifyContent: 'center'
         },
     logo: {
-        width: 150,
-        height: 150,
+        width: 75,
+        height: 75,
         alignSelf: 'center'
     }
    
