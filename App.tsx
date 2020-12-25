@@ -9,8 +9,10 @@ import Title from '../SolarCalculator/src/components/Title';
 //navigation
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+
+//screens
 import HomeScreen from './src/HomeScreen';
-import CamperVanPath from './src/CamperVanPath';
+import CamperVanPath from './src/CamperVanPath'
 
 
 const Stack = createStackNavigator();

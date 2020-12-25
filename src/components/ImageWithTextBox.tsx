@@ -1,17 +1,19 @@
 import React from 'react';
-import { StyleSheet, View} from 'react-native';
+import { StyleSheet, View, Image, Text, TouchableOpacity} from 'react-native';
 
 export interface Props {
-    test?: boolean;
+    source?: any;
+    text?: string;
 }
 
-const ImageWithTextBox: React.FC<Props> = (props) => {
+const ImageWithTextBox: React.FC<Props> = ({source, text}) => {
 
     return (
-    
-            <View style={[styles.DetailedViewScreen_icon]}>
-            
-            </View>
+        
+            <TouchableOpacity style={[styles.Container]}>
+                   <Image source={source} style={{ width: 250, height: 250 }} />  
+                   <h4>{text}</h4>
+            </TouchableOpacity>
     
         );
         }
@@ -20,11 +22,11 @@ const ImageWithTextBox: React.FC<Props> = (props) => {
 
 // styles
 const styles = StyleSheet.create({
-    DetailedViewScreen_icon: {
+    Container: {
         width: 250,
-        height: 250,
-        backgroundColor: 'red'
-        
+        height: 300,
+        display: "flex",
+        alignItems: 'center',
         },
    
     });
