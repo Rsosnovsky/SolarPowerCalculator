@@ -2,9 +2,8 @@ import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 
 //components
-import Header from '../SolarCalculator/src/components/Header';
-import Title from '../SolarCalculator/src/components/Title';
-
+import Header from './src/components/Header';
+import Title from './src/components/Title';
 
 //navigation
 import { NavigationContainer } from '@react-navigation/native';
