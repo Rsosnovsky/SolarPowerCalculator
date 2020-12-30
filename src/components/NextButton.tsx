@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, TouchableOpacity, View} from 'react-native';
+import { StyleSheet, TouchableOpacity, Text} from 'react-native';
 
 export interface Props {
     navigation: any,
@@ -13,10 +13,8 @@ const NextButton: React.FC<Props> = ({navigation, screen}) => {
 
     return (
         
-        <TouchableOpacity onPress={goToNextPage}>
-            <View style={[styles.NextStyling]}>
-                Next
-            </View>
+        <TouchableOpacity  onPress={goToNextPage}>
+            <Text style={[styles.NextStyling]}>Next</Text>
         </TouchableOpacity>
         
         );
