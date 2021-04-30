@@ -8,35 +8,42 @@ export interface Props {
      
 }
 
-const ImageWithTextBox: React.FC<Props> = ({source, text, highlight, settest}) => {
+const SelectBox: React.FC<Props> = ({source, text, highlight}) => {
 
 
     return (
         
-        <View style={[styles.Container]}>
-                <Image source={source} style={{ width: 250, height: 250 }} />  
+        <View style={styles.Container}>
+            
+                <Image source={{uri : source}} style={styles.imgSyl} />  
                 <h4>{text}</h4>
                 {(highlight === true)? 
                 <View style={styles.boxStyle}/>
                 :<View/>
                 }
-                
+             
         </View>
    
 
         );
         }
     
-    export default ImageWithTextBox;
+    export default SelectBox;
 
 // styles
 const styles = StyleSheet.create({
     Container: {
-        width: 250,
-        height: 300,
-        display: "flex",
+        minHeight: 300,
+        flex: 1,
         alignItems: 'center',
         },
+
+    imgSyl:{
+        flex: 1,
+        alignSelf: 'stretch',
+        width: undefined,
+        height: undefined
+    },
     boxStyle: {
         backgroundColor: '#FF9506', 
         width: "100%", 
