@@ -4,14 +4,8 @@ import { Icon, InlineIcon } from '@iconify/react';
 import arrowBackOutline from '@iconify-icons/ion/arrow-back-outline';
 
 
-export interface Props {
-    navigation: any;
-}
 
-const NextButton: React.FC<Props> = ({navigation, }) => {
-    function goBack() {
-        navigation.goBack();
-      }
+const NextButton: React.FC<Props> = () => {
 
     return (
             <View style={styles.Arrow_icon_style}>

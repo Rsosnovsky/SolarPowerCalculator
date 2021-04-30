@@ -20,7 +20,8 @@
     "react-native-elements": "^3.0.1",
     "react-native-vector-icons": "^7.1.0",
     "react-native-web": "~0.13.12",
-    "react-switch": "^5.0.1"
+    "react-switch": "^5.0.1",
+    "validate.js": "^0.13.1"
   },
   "devDependencies": {
     "@babel/core": "~7.9.0",

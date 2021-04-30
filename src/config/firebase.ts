@@ -15,13 +15,22 @@ firebase.initializeApp(firebaseConfig);
 
 const dbh = firebase.firestore();
 
-export const uploadData = ()=>{
-    console.log('HERE');
-dbh.collection("Survey Results").doc("mario").set({
-  employment: "plumber",
-  outfitColor: "red",
-  specialAttack: "fireball"
-}).catch((err)=>{
+export const uploadData = (info: any, pullDocID: { (input: string): void; (arg0: any): void; })=>{
+    
+dbh.collection("Survey Results").add({info}).then  ((docRef: any)=>{
+    pullDocID(docRef.id) //retrun the ref ID in DB to be used to match the email with
+})
+    
+.catch((err: any)=>{
     console.log('err:', err.message)
 })
 }
+
+export const uploadEmailData = (info)=>{
+    
+    dbh.collection("Email List").add({info})
+        
+    .catch((err: any)=>{
+        console.log('err:', err.message)
+    })
+    }

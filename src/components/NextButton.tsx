@@ -2,18 +2,13 @@ import React from 'react';
 import { StyleSheet, TouchableOpacity, Text} from 'react-native';
 
 export interface Props {
-    navigation: any,
-    screen: string
+    OnUserTap: any;
 }
 
-const NextButton: React.FC<Props> = ({navigation, screen}) => {
-    function goToNextPage() {
-        navigation.navigate(screen);
-      }
-
+const NextButton: React.FC<Props> = ({OnUserTap}) => {
+   
     return (
-        
-        <TouchableOpacity  onPress={goToNextPage}>
+        <TouchableOpacity  onPress={OnUserTap}>
             <Text style={[styles.NextStyling]}>Next</Text>
         </TouchableOpacity>
         

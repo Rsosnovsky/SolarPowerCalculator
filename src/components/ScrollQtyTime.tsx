@@ -5,122 +5,58 @@ import Slider from '@react-native-community/slider';
 
 
 export interface Props {
-    title: string,
-    img: string,
-    setData: any,
-    qty: any,
-    time: any,
-    message: any,
-    DC: any
+    SliderOPs: any,
+    Qdata: any,
+    index: any
 }
 
-const ScrollQtyTime: React.FC<Props> = ({title, img, setData, qty, time, message, DC}) => {
-    const [highlightDC, sethighlightDC] = useState('')
-    const [highlightAC, sethighlightAC] = useState('')
+const ScrollQtyTime: React.FC<Props> = ({Qdata, index}) => {
+
+    let dateUpdater = Qdata;
+
+    const [ACDC, setACDC] = useState(Qdata.ACDC);
+    const [valH, setvalH] = useState(Qdata.valH);
+    const [valU, setvalU] = useState(Qdata.valU);
     
-    //will highlight the DC or AC base on the DC state
+    const [highlightDC, sethighlightDC] = useState('');
+    const [highlightAC, sethighlightAC] = useState('');
+    
+    //will highlight the DC or AC base on the DC state on open
     useEffect(() => {
-        console.log(DC)
-       if(DC === true){
-        console.log('true ran')
+        if(ACDC === true){    
         sethighlightDC('#FF9506')
         sethighlightAC('white')
-        
-       }else if (DC === false){
-        console.log('false ran')
+       }else if (ACDC === false){
         sethighlightDC('white')
         sethighlightAC('#FF9506')
        }
-        
-        
-        return () => {
-            
-        }
     }, [])
 
-    //updates the time as users scroll through the bar
-    const settime =(newTime: any)=>{
-        setData((prevState: { step2: { survyQuestions: any; }; }) => ({
-            ...prevState,
-            step2: {
-              ...prevState.step2,
-              survyQuestions: {
-                    ...prevState.step2.survyQuestions,
-                    [title]:{
-                        title: title,
-                        img: img,
-                        qty: qty,
-                        message: '',
-                        time: newTime
-
-                    }  
-                }
-            }
-          }));
-    }
-
-    //updates the qty in the the main data set as user drags the bar
-    const setqty =(newQty: any)=>{
-        setData((prevState: { step2: { survyQuestions: any; }; }) => ({
-            ...prevState,
-            step2: {
-              ...prevState.step2,
-              survyQuestions: {
-                    ...prevState.step2.survyQuestions,
-                    [title]:{
-                        title: title,
-                        img: img,
-                        qty: newQty,
-                        message: '',
-                        time: time,
-                        DC: DC
-
-                    }  
-                }
-            }
-          }));
-    }
-
-    //this will update the DC variable in the overall object
-    async function setDCinData (DCState: any){
-        setData((prevState: { step2: { survyQuestions: any; }; }) => ({
-            ...prevState,
-            step2: {
-              ...prevState.step2,
-              survyQuestions: {
-                    ...prevState.step2.survyQuestions,
-                    [title]:{
-                        title: title,
-                        img: img,
-                        qty: qty,
-                        message: '',
-                        time: time,
-                        DC: DCState
-                    }  
-                }
-            }
-          }));
-    }
+    useEffect(()=>{
+        dateUpdater.ACDC = ACDC
+        dateUpdater.valH = valH
+        dateUpdater.valU = valU        
+    },[ACDC,valH,valU])
 
     const handleDCPress = async ()=>{
-        await setDCinData(true)
         sethighlightDC('#FF9506')
         sethighlightAC('white')
+        setACDC(true)
     }
 
     const handleACPress =async ()=>{
-        await setDCinData(false)
         sethighlightDC('white')
         sethighlightAC('#FF9506')
+        setACDC(false)
     }
 
     return (
         <View style={[styles.Container]}>
-            <Text style = {{textAlign: 'center', flex: 1, fontWeight: "bold", textAlignVertical: 'center', borderRadius: 10}}> {title.charAt(0).toUpperCase() + title.slice(1)}</Text>
+            <Text style = {{textAlign: 'center', flex: 1, fontWeight: "bold", textAlignVertical: 'center', borderRadius: 10}}> {Qdata.title}</Text>
             <View style = {{display: 'flex', flexDirection:'row'}}>
                 <View style={[styles.ContainerTextImg]}> 
                     <View style = {{flex: 5}}>
-                        <ImageBackground source={{uri: img}}
+                        <ImageBackground source={{uri: Qdata.image}}
                         style={{alignSelf: 'center', width: 100, height: 100}} />
                     </View>
                 </View>
@@ -136,33 +72,34 @@ const ScrollQtyTime: React.FC<Props> = ({title, img, setData, qty, time, message
                     </View>
                     <View style ={{flexDirection: 'row'}}>
                         <Text style = {{flex: 1, textAlign:'center', fontWeight: 'bold'}}>
-                            {qty} unit/s
+                            {valU} unit/s
                         </Text>
                         <Slider
-                            value = {qty}
+                            value = {valU}
                             style={{width: 200, height: 50}}
                             minimumValue={0}
                             maximumValue={10}
                             step = {1}
                             minimumTrackTintColor="#FF9506" 
                             maximumTrackTintColor="black"
-                            onSlidingComplete = {(value: any)=> {setqty(value)}}
+                            onValueChange = {(value: any)=> {setvalU(value)}}
                         />
                     </View>
                     
                     <View style ={{flexDirection: 'row'}}>
                         <Text style = {{flex: 1, textAlign:'center', fontWeight: 'bold'}}>
-                            {time} hours
+                            {valH} hours
                         </Text>
                         <Slider
-                            value = {time}
+                            value = {valH}
                             style={{width: 200, height: 50}}
                             minimumValue={0}
-                            maximumValue={10}
+                            maximumValue={24}
                             step = {1}
                             minimumTrackTintColor="#FF9506" 
                             maximumTrackTintColor="black"
-                            onSlidingComplete = {(value: any)=> {settime(value)}}
+                            onValueChange = {(value: any)=> {setvalH(value)}}
+                    
                         />
                     </View>
                 </View>
